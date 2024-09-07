@@ -80,7 +80,6 @@ def format_date_for_yesterday(date_obj):
 def get_date():
     res_day = ""
     current_date = current_datetime.date()
-    print(current_date)
     with open("output.txt", "r") as f:
         response = f.read()
     if "yesterday" in response or "no" in response:
@@ -98,9 +97,11 @@ def get_date():
 
 def get_weight():
     with open("output.txt", "r") as f:
-        weight = f.read().strip()
+        weight = f.read().strip().replace("kilograms", "").replace("kg", "").strip()
     weight_text = f"{weight} kilograms. How much did you run?"
-    if isinstance(weight_text, str):
+    if weight.isdigit():
+        number = weight
+    elif isinstance(weight, str):
         number = w2n.word_to_num(weight)
     else:
         number = weight_text
@@ -109,11 +110,13 @@ def get_weight():
 
 def get_run():
     with open("output.txt", "r") as f:
-        run = f.read().strip()
+        run = f.read().strip().replace("kilometers", "").replace("kilometer", "").replace("km", "").strip()
         if any(word in run for word in ["no", "didn't", "nothing", "none", "nup", "nope"]):
             run = "0"
     run_text = f"{run} kilometers. And coding?"
-    if isinstance(run_text, str):
+    if run.isdigit():
+        number = run
+    elif isinstance(run, str):
         number = w2n.word_to_num(run)
     else:
         number = run_text
@@ -122,11 +125,13 @@ def get_run():
 
 def get_code():
     with open("output.txt", "r") as f:
-        code = f.read().strip().lower()
+        code = f.read().strip().lower().replace("hours", "").replace("hour", "").strip()
         if any(word in code for word in ["no", "didn't", "nothing", "none", "nup", "nope"]):
             code = "0"
     code_text = f"{code} hours. Would you like to make a journal entry?"
-    if isinstance(code_text, str):
+    if code.isdigit():
+        number = code
+    elif isinstance(code, str):
         number = w2n.word_to_num(code)
     else:
         number = code_text
@@ -150,35 +155,35 @@ def main():
     journal_entry = ""
 
     os.system("start audio/welcome.mp3")
-    time.sleep(1)
     listen()
 
     date_text, chosen_date = get_date()
     make_audio_file(date_text, weight_question)
     os.system("start audio/weight.mp3")
-    time.sleep(3)
+    time.sleep(1)
     listen()
 
     weight_text, weight_number = get_weight()
     make_audio_file(weight_text, run_question)
     os.system("start audio/run.mp3")
-    time.sleep(3)
+    time.sleep(1)
     listen()
 
     run_text, run_number = get_run()
     make_audio_file(run_text, code_question)
     os.system("start audio/code.mp3")
-    time.sleep(3)
+    time.sleep(1)
     listen()
 
     code_text, code_number = get_code()
     make_audio_file(code_text, journal_question)
     os.system("start audio/journal.mp3")
-    time.sleep(3)
+    time.sleep(2)
     listen()
 
     if get_yes_or_no():
         os.system("start audio/okay.mp3")
+        time.sleep(1)
         listen()
         journal_text, journal_entry = get_journal()
         make_audio_file(journal_text, goodbye)
