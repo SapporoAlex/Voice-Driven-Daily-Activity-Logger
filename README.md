@@ -50,6 +50,8 @@ This project is a voice-driven daily activity logger that records daily metrics 
    - Optionally, a journal entry.
 
 3. The responses will be saved in `records.txt`.
+<img src="https://github.com/SapporoAlex/Voice-Driven-Daily-Activity-Logger/blob/main/audio-driven-daily-activity-logger-example-output.jpg" alt="image of example output">
+example output
 
 ## How It Works
 
