@@ -38,7 +38,7 @@ This project is a voice-driven daily activity logger that records daily metrics 
 1. Run the main script:
 
     ```bash
-    python main.py
+    python self_checker_audio_input.py
     ```
 
 2. Follow the voice prompts and speak your responses. The program will ask for:
