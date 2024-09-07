@@ -68,7 +68,7 @@ example output
 ## Customization
 
 - You can customize the prompts and add more questions by modifying the `self_checker_audio_input.py` file.
-- To change the output format of the entries, modify the `create_statement()` function in `main.py`.
+- To change the output format of the entries, modify the `create_statement()` function in `self_checker_audio_input.py`.
 
 ## Dependencies
 
